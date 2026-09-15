@@ -1,0 +1,64 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<div class="container mt-5 pt-5">
+    <h2 class="text-center text-warning fw-bold mb-4">Bóveda de Zeni (Créditos)</h2>
+    
+    <div class="row justify-content-center">
+        <div class="col-md-5 p-4 bg-light border rounded shadow text-center">
+            
+            <img src="Imagenes/Logo.jpg" alt="Zeni" width="80" class="mb-3 rounded-circle">
+            <h4>Compra tus créditos</h4>
+            <p class="text-muted">1 Zeni = $500 CLP</p>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="cantidadZeni" placeholder="Ej: 100">
+                <label for="cantidadZeni">¿Cuántos Zeni deseas comprar?</label>
+            </div>
+            <button class="btn btn-outline-primary w-100 mb-3" id="btnCalcular">Calcular Total</button>
+            <h3 class="text-success mb-4" id="textoTotal">Total a pagar: $0</h3>
+            
+            <button class="btn btn-warning w-100 fw-bold py-2" data-bs-toggle="modal" data-bs-target="#modalCompra">
+                Pagar y Recargar
+            </button>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalCompra" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-warning">
+        <h5 class="modal-title fw-bold">¡Transacción Exitosa!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <h4 class="mt-2">¡Tu nivel de poder ha aumentado!</h4>
+        <p>Los Zenis han sido añadidos correctamente a tu cuenta.</p>
+      </div>
+      <div class="modal-footer">
+        <a href="index.html" class="btn btn-primary w-100">Volver al Lobby</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+    const botonCalcular = document.getElementById('btnCalcular');
+
+    if (botonCalcular) {
+        botonCalcular.addEventListener('click', function() {
+
+            const cantidad = document.getElementById('cantidadZeni').value;
+            const precioPorZeni = 500;
+            const totalMath = cantidad * precioPorZeni;
+            
+            document.getElementById('textoTotal').innerText = "Total a pagar: $" + totalMath;
+        });
+    }
+</script>

@@ -1,0 +1,104 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<nav class="navbar navbar-dbz fixed-top">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+     
+    <form class="d-flex mx-auto" role="search">
+          <input class="form-control me-2" type="search" placeholder="Buscar" aria-      label="Search"/>
+          <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
+    
+  <form class="d-flex" id="botonesVisitante">
+    <a class="btn btn-outline-ligth me-2" href="Iniciar.html">Iniciar sesion</a>
+    <a class="btn btn-outline-light" href="Registrar.html">Registrarse</a>
+  </form>
+
+  <form class="d-flex d-none" id="menuUsuario">
+  <span class="text-white me-3 d-flex align-items-center fw-bold">Hola, Guerrero Z</span>
+  <button class="btn btn-danger" type="button" id="btnCerrarSesion">Salir</button>
+</form>
+
+  <div class="d-flex align-items-center d-none" id="GrupoUsuario">
+    <span class="text-white me-3 fw-bold" id="NombrePantalla"></span>
+    <button class="btn btn-danger btn-sm" type="button" id="BtnCerrarSesion">Cerrar Sesion</button>
+  </div>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">BetBallZ</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="index.html">Lobby (Inicio)</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="Planeta.html">Planetas de Juegos</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="boveda.html">Boveda de Zeni (Recargas)</a>
+  </li>
+  <hr>
+  <li class="nav-item" id="sidebarVisitante">
+    <a class="btn btn-outline-warning w-100 mt-2" href="Iniciar.html">Iniciar Sesion</a>
+  </li>
+  <li class="nav-item d-none" id="sidebarUsuario">
+  <button class="btn btn-outline-danger w-100 mt-2" type="button" id="btnCerrarSesionSidebar">
+    Cerrar Sesión
+  </button>
+</li>
+</ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-5 pt-5">
+ <div class="row justify-content-center">
+  <div class="col-md-7 bg-light text-center">
+  <img src="Imagenes/betballz.jpg" class="img-fluid rounded shadow" alt="Casino DB">
+ </div>
+</div>
+  <div class="row mt-4">
+    <div class="col-md-4 bg-light p-4 border text-center">Juego de Cartas DBZ</div>
+    <div class="col-md-4 bg-light p-4 border text-center">Tragamonedas Shenlong</div>
+    <div class="col-md-4 bg-light p-4 border text-center">Ruleta Capsula</div>
+  </div>
+</div>
+
+<script>
+    const haySesion = localStorage.getItem("sesionIniciada");
+
+    const divVisitante = document.getElementById("botonesVisitante");
+    const divUsuario = document.getElementById("menuUsuario");
+    const sideVisitante = document.getElementById("sidebarVisitante");
+    const sideUsuario = document.getElementById("sidebarUsuario");
+
+    if (haySesion === "si") {
+        if (divVisitante) divVisitante.classList.add("d-none");
+        if (sideVisitante) sideVisitante.classList.add("d-none");
+    
+        if (divUsuario) divUsuario.classList.remove("d-none");
+        if (sideUsuario) sideUsuario.classList.remove("d-none");
+    }
+
+    function cerrarSesion() {
+        localStorage.removeItem("sesionIniciada");
+        window.location.reload();
+    }
+    const btnSalirArriba = document.getElementById("btnCerrarSesion");
+    if (btnSalirArriba) {
+        btnSalirArriba.addEventListener('click', cerrarSesion);
+    }
+
+    const btnSalirSide = document.getElementById("btnCerrarSesionSidebar");
+    if (btnSalirSide) {
+        btnSalirSide.addEventListener('click', cerrarSesion);
+    }
+</script>
