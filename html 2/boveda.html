@@ -1,0 +1,138 @@
+<html lang="es" data-bs-theme="dark">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bóveda de Zeni · BetBallZ</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css?v=2">
+
+  <nav class="navbar navbar-dbz fixed-top" x-data>
+    <div class="container-fluid gap-2">
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Abrir menú">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- El buscador manda a Planeta.html?q=... y allí Alpine filtra -->
+      <form class="d-flex flex-grow-1 flex-md-grow-0 mx-md-auto" role="search" data-bs-theme="light" action="Planeta.html" method="get">
+        <input class="form-control me-2" type="search" name="q" placeholder="Buscar juegos" aria-label="Buscar juegos">
+        <button class="btn btn-dark btn-buscar" type="submit">Buscar</button>
+      </form>
+
+      <!-- Visitante -->
+      <div x-show="!$store.sesion.activa" x-cloak>
+        <div class="d-none d-sm-flex">
+          <a class="btn btn-outline-light me-2" href="Iniciar.html">Iniciar sesión</a>
+          <a class="btn btn-light fw-bold text-dark" href="Registrar.html">Registrarse</a>
+        </div>
+      </div>
+      <!-- Usuario con sesión -->
+      <div x-show="$store.sesion.activa" x-cloak>
+        <div class="d-none d-sm-flex align-items-center">
+          <span class="text-white me-3 fw-bold" id="saludo">Hola, <span x-text="$store.sesion.nombre"></span></span>
+          <button class="btn btn-danger btn-sm" type="button" @click="$store.sesion.cerrar()">Salir</button>
+        </div>
+      </div>
+
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">BetBallZ</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav flex-grow-1 pe-3">
+            <li class="nav-item"><a class="nav-link " href="index.html">Lobby (Inicio)</a></li>
+            <li class="nav-item"><a class="nav-link " href="Planeta.html">Planetas de Juegos</a></li>
+            <li class="nav-item"><a class="nav-link active" href="boveda.html">Bóveda de Zeni (Recargas)</a></li>
+            <hr>
+            <li class="nav-item" x-show="!$store.sesion.activa" x-cloak>
+              <a class="btn btn-outline-warning w-100 mt-2" href="Iniciar.html">Iniciar sesión</a>
+              <a class="btn btn-outline-light w-100 mt-2" href="Registrar.html">Registrarse</a>
+            </li>
+            <li class="nav-item" x-show="$store.sesion.activa" x-cloak>
+              <button class="btn btn-outline-danger w-100 mt-2" type="button" @click="$store.sesion.cerrar()">Cerrar sesión</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mt-5 pt-4" x-data="bovedaZeni()">
+    <h1 class="titulo-seccion text-center h3 mb-4">Bóveda de Zeni (Créditos)</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+
+        <!-- Respuesta del formulario (sin recargar la página) -->
+        <div class="alert alert-success" role="status" x-show="enviado" x-cloak>
+          <h2 class="h6 alert-heading">✅ ¡Transacción simulada exitosa!</h2>
+          <p class="mb-1" x-show="resumen">
+            <strong x-text="resumen && resumen.cuenta"></strong> recargó
+            <strong x-text="resumen && resumen.cantidad"></strong> Zeni
+            (<span x-text="resumen && formatoCLP(resumen.total)"></span> vía <span x-text="resumen && resumen.metodo"></span>).
+          </p>
+          <p class="small mb-0">Es solo una simulación: no se cobra nada y esta información no se guarda; se pierde al recargar la página.</p>
+          <a href="index.html" class="btn btn-sm btn-outline-success mt-2">Volver al Lobby</a>
+        </div>
+
+        <div class="alert alert-danger" role="alert" x-show="Object.keys(errores).length > 0" x-cloak>
+          Revisa los campos marcados en rojo antes de continuar.
+        </div>
+
+        <form class="panel-bz p-4" @submit.prevent="enviar()" novalidate>
+          <div class="text-center mb-3">
+            <img src="Imagenes/Logo.jpg" alt="Logo BetBallZ" width="80" class="rounded-circle mb-2">
+            <h2 class="h5 mb-0">Compra tus créditos</h2>
+            <p class="text-secondary small mb-0">1 Zeni = $500 CLP (valores ficticios)</p>
+          </div>
+
+          <div class="mb-3">
+            <label for="cuenta" class="form-label">Nombre de cuenta</label>
+            <input id="cuenta" type="text" class="form-control" :class="{ 'is-invalid': errores.cuenta }" x-model="cuenta" placeholder="Ej: GokuFan99">
+            <div class="invalid-feedback" x-text="errores.cuenta"></div>
+          </div>
+
+          <div class="mb-3">
+            <label for="correo" class="form-label">Correo electrónico</label>
+            <input id="correo" type="email" class="form-control" :class="{ 'is-invalid': errores.correo }" x-model="correo" placeholder="guerrero@correo.com">
+            <div class="invalid-feedback" x-text="errores.correo"></div>
+          </div>
+
+          <div class="mb-3">
+            <label for="cantidad" class="form-label">¿Cuántos Zeni deseas comprar?</label>
+            <input id="cantidad" type="number" min="1" max="1000" class="form-control" :class="{ 'is-invalid': errores.cantidad }" x-model="cantidad" placeholder="Ej: 100">
+            <div class="invalid-feedback" x-text="errores.cantidad"></div>
+          </div>
+
+          <p class="h4 text-success text-center my-3">Total a pagar: <span x-text="formatoCLP(total)"></span></p>
+
+          <div class="mb-3">
+            <label for="metodo" class="form-label">Método de pago (simulado)</label>
+            <select id="metodo" class="form-select" :class="{ 'is-invalid': errores.metodo }" x-model="metodo">
+              <option value="">Selecciona…</option>
+              <option>Tarjeta de débito</option>
+              <option>Tarjeta de crédito</option>
+              <option>Transferencia</option>
+            </select>
+            <div class="invalid-feedback" x-text="errores.metodo"></div>
+          </div>
+
+          <div class="form-check mb-3">
+            <input id="acepta" type="checkbox" class="form-check-input" :class="{ 'is-invalid': errores.acepta }" x-model="acepta">
+            <label for="acepta" class="form-check-label small">Entiendo que son créditos virtuales y no se usa dinero real.</label>
+            <div class="invalid-feedback" x-text="errores.acepta"></div>
+          </div>
+
+          <button type="submit" class="btn btn-bz w-100 py-2">Pagar y Recargar</button>
+        </form>
+      </div>
+    </div>
+
+    <footer class="text-center mt-5">
+      BetBallZ · Proyecto académico con créditos virtuales (Zeni) · No se usa dinero real · Juego responsable
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+ 
+  <script src="js/app.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"></script>
+</html>

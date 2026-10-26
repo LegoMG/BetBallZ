@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "nombre": "Poker Saiyajin",
+    "categoria": "Cartas",
+    "planeta": "Vegeta",
+    "apuestaMinima": 10,
+    "estado": "Disponible",
+    "descripcion": "Texas Hold'em con mesas de guerreros de élite. Gana el que tenga más nivel de poder... y mejor mano."
+  },
+  {
+    "id": 2,
+    "nombre": "Blackjack Capsule Corp",
+    "categoria": "Cartas",
+    "planeta": "Tierra",
+    "apuestaMinima": 5,
+    "estado": "Disponible",
+    "descripcion": "Llega a 21 con las cartas tecnológicas de la Corporación Cápsula. Ideal para principiantes."
+  },
+  {
+    "id": 3,
+    "nombre": "Juego de Cartas DBZ",
+    "categoria": "Cartas",
+    "planeta": "Tierra",
+    "apuestaMinima": 2,
+    "estado": "Disponible",
+    "descripcion": "Duelo de cartas con tus personajes favoritos. Cada victoria suma Zeni a tu bóveda."
+  },
+  {
+    "id": 4,
+    "nombre": "Tragamonedas Shenlong",
+    "categoria": "Tragamonedas",
+    "planeta": "Tierra",
+    "apuestaMinima": 1,
+    "estado": "Disponible",
+    "descripcion": "Alinea siete esferas del dragón y convoca a Shenlong para el premio mayor."
+  },
+  {
+    "id": 5,
+    "nombre": "Tragamonedas Super Saiyajin",
+    "categoria": "Tragamonedas",
+    "planeta": "Vegeta",
+    "apuestaMinima": 2,
+    "estado": "Disponible",
+    "descripcion": "Cada giro cargado transforma los rodillos en dorado y multiplica la ganancia."
+  },
+  {
+    "id": 6,
+    "nombre": "Ruleta Cápsula",
+    "categoria": "Ruleta",
+    "planeta": "Tierra",
+    "apuestaMinima": 5,
+    "estado": "Disponible",
+    "descripcion": "Apuesta al rojo, negro o a tu número de la suerte. La cápsula decide dónde cae la bola."
+  },
+  {
+    "id": 7,
+    "nombre": "Ruleta Namek",
+    "categoria": "Ruleta",
+    "planeta": "Namek",
+    "apuestaMinima": 8,
+    "estado": "Mantención",
+    "descripcion": "Ruleta de doble cero con premios ocultos en cada sector. Temporalmente en mantención."
+  },
+  {
+    "id": 8,
+    "nombre": "Dados del Maestro Roshi",
+    "categoria": "Dados",
+    "planeta": "Kame House",
+    "apuestaMinima": 3,
+    "estado": "Disponible",
+    "descripcion": "Lanza dos dados y suma puntos. El Maestro Roshi siempre dice que tiene suerte."
+  },
+  {
+    "id": 9,
+    "nombre": "Baccarat Torneo del Poder",
+    "categoria": "Cartas",
+    "planeta": "Reino Sagrado",
+    "apuestaMinima": 25,
+    "estado": "Disponible",
+    "descripcion": "Mesa de apuestas altas para jugadores con mucho ki. Solo para valientes."
+  },
+  {
+    "id": 10,
+    "nombre": "Bingo Kame House",
+    "categoria": "Bingo",
+    "planeta": "Kame House",
+    "apuestaMinima": 1,
+    "estado": "Mantención",
+    "descripcion": "Bingo relajado en la playa con la pandilla. Vuelve pronto con nuevos premios."
+  }
+]
