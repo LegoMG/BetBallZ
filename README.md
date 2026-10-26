@@ -45,7 +45,7 @@ Todas las rutas son relativas.
 Correcciones respecto a la Tarea 1: IDs duplicados en formularios, atributo `aria-label` roto, clase mal escrita (`btn-outline-ligth`), botones de redes sociales con íconos rotos (eliminados), y la página `Planeta.html` que estaba vacía.
 
 ## 5. Archivo JSON
-Ubicación: `datos/juegos.json` (URL pública: `http://http://100.57.52.123/datos/juegos.json`).
+Ubicación: `datos/juegos.json` (URL pública: `http://100.57.52.123/datos/juegos.json`).
 Es una lista de objetos con esta estructura:
 ```json
 {
@@ -81,8 +81,8 @@ Es un recurso estático de solo lectura: los datos son ficticios y públicos.
 - Dañar el JSON (borrar una coma) para ver el error "mal escrito". Se puede reintentar con el botón "Reintentar".
 
 ## 9. Despliegue
-Sitio: `http://http://100.57.52.123`
-Datos: `http://http://100.57.52.123/datos/juegos.json`
+Sitio: `http://100.57.52.123`
+Datos: `http://100.57.52.123/datos/juegos.json`
 Servidor web: Apache/Nginx en EC2, puerto 80 (HTTP), con Elastic IP asociada.
 
 ## 10. Limitaciones conocidas
